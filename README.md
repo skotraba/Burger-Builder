@@ -33,5 +33,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### Udemy course source
 
-https://www.udemy.com/course/react-the-complete-guide-incl-redux/
+This project was based off of this course: [Udemy React Course](https://www.udemy.com/course/react-the-complete-guide-incl-redux/).
+
 
