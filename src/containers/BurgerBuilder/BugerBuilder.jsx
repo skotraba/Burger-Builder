@@ -54,12 +54,19 @@ class BugerBuilder extends Component {
   
   
   render() {
+    const disabledInfo = {
+      ...this.state.ingredients
+    };
+    for(let key in disabledInfo){
+      disabledInfo[key] = disabledInfo[key] <= 0
+    }
     return (
      <Auxx>
        <Burger ingredients={this.state.ingredients}/>
        <BuildControls
         ingredientAdded={this.addIngredientHandler}
-        ingredientRemove={this.removeIngredientHandler}/>
+        ingredientRemove={this.removeIngredientHandler}
+        disabled={disabledInfo}/>
      </Auxx>
     );
   }
