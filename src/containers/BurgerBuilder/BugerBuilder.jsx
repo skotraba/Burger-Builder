@@ -19,7 +19,15 @@ class BugerBuilder extends Component {
      cheese: 0,
      meat: 0
    },
-   totalPrice: 4
+   totalPrice: 4,
+   purchaseable: false
+ }
+
+ updatePurchaseState () {
+   const ingredients = {
+     ...this.state.ingredients
+   };
+   const sum = Object.keys(ingredients)
  }
 
  addIngredientHandler = (type) => {
@@ -66,7 +74,8 @@ class BugerBuilder extends Component {
        <BuildControls
         ingredientAdded={this.addIngredientHandler}
         ingredientRemove={this.removeIngredientHandler}
-        disabled={disabledInfo}/>
+        disabled={disabledInfo}
+        price={this.state.totalPrice}/>
      </Auxx>
     );
   }
