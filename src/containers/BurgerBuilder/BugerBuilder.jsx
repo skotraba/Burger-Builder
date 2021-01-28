@@ -79,7 +79,7 @@ class BugerBuilder extends Component {
  }
 
  purchaseContinueHandler = () => {
-   alert("You continue")
+   console.log("continue")
  }
   
   

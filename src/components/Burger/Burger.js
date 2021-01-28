@@ -10,14 +10,14 @@ const burger = (props) => {
             return <BurgerIngredient key={igKey + i} type={igKey}/>
         })
     })
-    console.log("Before reduce:\n")
-    console.log(transformedIngredients)
+    // console.log("Before reduce:\n")
+    // console.log(transformedIngredients)
     
     transformedIngredients = transformedIngredients.reduce((arr, el) => {
         return arr.concat(el)
     }, [])
-    console.log("After reduce:\n")
-    console.log(transformedIngredients)
+    // console.log("After reduce:\n")
+    // console.log(transformedIngredients)
     if(transformedIngredients.length === 0){
         transformedIngredients = <p>Please start adding ingredients</p>
     }

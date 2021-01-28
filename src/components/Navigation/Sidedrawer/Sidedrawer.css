@@ -18,16 +18,18 @@
   margin-bottom: 32px;
 }
 
+/* Responsible for displaying animation */
+.Open{
+  transform: translateX(0);
+}
+
+.Close{
+  transform: translateX(-100%);
+}
+
 @media (min-width: 500px) {
   .Sidedrawer {
     display: none;
   }
-/* Responsible for displaying animation */
-  .Open{
-    transform: translateX(0);
-  }
 
-  .Close{
-    transform: translateX(-100%);
-  }
 }
