@@ -26,16 +26,26 @@ class BugerBuilder extends Component {
    purchasing: false
  }
 
- updatePurchaseState () {
-   const ingredients = {
-     ...this.state.ingredients
-   };
-   const sum = Object.keys(ingredients).map(igKey => {
-     return ingredients[igKey]
-   }).reduce((sum, el) => {
-     return sum + el;
-   }, 0);
-   this.setState({purchasable: sum > 0})
+ updatePurchaseState (ingredients) {
+
+  const sum = Object.keys(ingredients)
+  .map(igKey => {
+      return ingredients[igKey];
+  } )
+  .reduce((sum, el) => {
+      return sum + el;
+  }, 0);
+  this.setState({ purchasable: sum > 0 } );
+
+  //  const ingredients = {
+  //    ...this.state.ingredients
+  //  };
+  //  const sum = Object.keys(ingredients).map(igKey => {
+  //    return ingredients[igKey]
+  //  }).reduce((sum, el) => {
+  //    return sum + el;
+  //  }, 0);
+  //  this.setState({purchasable: sum > 0})
  }
 
  addIngredientHandler = (type) => {

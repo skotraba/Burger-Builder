@@ -3,21 +3,20 @@ import React from 'react';
 import Logo from '../../Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import Backdrop from '../../UI/Backdrop/Backdrop';
-import Aux from '../../../containers/hoc/Auxx';
+import Auxx from '../../../containers/hoc/Auxx';
 
 import './Sidedrawer.css';
-// import modal from '../../UI/Modal/Modal';
 
-const Sidedrawer = (props) => {
+
+const sideDrawer = (props) => {
   let attachedClasses = ["Sidedrawer", "Close"]
   if(props.open) {
     attachedClasses = ["Sidedrawer", "Open"]
   }
 
-  // console.log(attachedClasses.join(' '))
 
   return (
-    <Aux>
+    <Auxx>
       <Backdrop show={props.open} clicked={props.closed}/>
       <div className={attachedClasses.join(' ')}>
         <div className={"Logo"}>
@@ -27,9 +26,9 @@ const Sidedrawer = (props) => {
           <NavigationItems/>
         </nav>
       </div>
-    </Aux>
+    </Auxx>
     
   );
 }
 
-export default Sidedrawer;
+export default sideDrawer;
