@@ -125,7 +125,7 @@ class BugerBuilder extends Component {
     }
 
     let orderSummary = null;
-    let burger = <Spinner />;
+    let burger = this.state.error ? <p>"Ingredients can't be loaded"</p> : <Spinner />;
 
     console.log(this.state.ingredients)
     if ( this.state.ingredients ) {
