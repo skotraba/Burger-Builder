@@ -30,8 +30,6 @@ class BugerBuilder extends Component {
  componentDidMount () {
    axios.get('https://burger-42f8d-default-rtdb.firebaseio.com/Ingredients.json').then(response => {
       this.setState({ ingredients: response.data})
-      console.log("ComponentDidMount")
-      console.log(response.data)
    })
    .catch ( error => {
      this.setState({ error: true})
@@ -91,32 +89,24 @@ class BugerBuilder extends Component {
  }
 
  purchaseContinueHandler = () => {
-  //  console.log("continue")
-  this.setState({ loading: true })
-  const order = {
-    ingredients: this.state.ingredients,
-    price: this.state.totalPrice,
-    customer: {
-      name: "Shannon",
-      address: "Test street 1",
-      zipCode: "12345",
-      country: "Germany"
-    },
-    email: "test@gmail.com"
+  // this.props.history.push('./checkout');
+  const query = [];
+  for (let i in this.state.ingredients) {
+    query.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
   }
-   //firebase only add .json for firebase to function correclty
-   axios.post('/orders.json', order)
-   .then(response => { 
-     this.setState({ loading: false, purchasing: false })
-    })
-   .catch (error => {
-     console.log(error)
-     this.setState({ loading: false, purchasing: false })
-  });
+  query.push('price=' + this.state.totalPrice);
+  const queryString = query.join('&');
+  this.props.history.push({
+    pathname: '/checkout',
+    search: '?' + queryString,
+  })
+  
  }
   
   
   render() {
+
+
     const disabledInfo = {
       ...this.state.ingredients
     };
@@ -127,9 +117,7 @@ class BugerBuilder extends Component {
     let orderSummary = null;
     let burger = this.state.error ? <p>"Ingredients can't be loaded"</p> : <Spinner />;
 
-    console.log(this.state.ingredients)
     if ( this.state.ingredients ) {
-      // console.log("Render: ", this.state.ingredients)
         burger = (
             <Auxx>
                 <Burger ingredients={this.state.ingredients} />
@@ -147,7 +135,7 @@ class BugerBuilder extends Component {
             ingredients={this.state.ingredients}
             price={this.state.totalPrice}
             purchaseCancelled={this.purchaseCancelHandler}
-            purchaseContinued={this.purchaseContinueHandler} />;
+            purchaseContinue={this.purchaseContinueHandler} />;
     }
     if ( this.state.loading ) {
       console.log("loading")
