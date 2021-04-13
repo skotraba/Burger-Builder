@@ -65,6 +65,7 @@ class ContactData extends Component {
             }
         ]
         },
+        value: "fastest"
       },
     },
     loading: false
@@ -72,20 +73,21 @@ class ContactData extends Component {
 
   orderHandler = (e) => {
     e.preventDefault();
-    this.setState({ loading: true })
+    this.setState({ loading: true });
+    const formData = {};
+
+
+    for (let formElementIdentifier in this.state.orderform) {
+      console.log(formElementIdentifier)
+      formData[formElementIdentifier] = this.state.orderform[formElementIdentifier].value;
+    }
+
     const order = {
       ingredients: this.props.ingredients,
       price: this.props.price,
-      customer: {
-        name: "Shannon",
-        address: "Test street 1",
-        zipCode: "12345",
-        country: "Germany",
-        email: "test@gmail.com"
-      },
+      orderData: formData,
       
     }
-
      //firebase only add .json for firebase to function correclty
      axios.post('/orders.json', order)
      .then(response => { 
@@ -96,9 +98,11 @@ class ContactData extends Component {
        console.log(error)
        this.setState({ loading: false})
     });
+    this.setState({ loading: false})
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
+    console.log("update")
     const updatedOrderForm = {
       ...this.state.orderform
     }
@@ -107,7 +111,7 @@ class ContactData extends Component {
     }
 
     updatedFormElement.value = event.target.value;
-    updatedFormElement[inputIdentifier] = updatedFormElement;
+    updatedOrderForm[inputIdentifier] = updatedFormElement;
     this.setState({orderform: updatedOrderForm});
 
   }
