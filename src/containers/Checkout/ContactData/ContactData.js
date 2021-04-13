@@ -17,7 +17,7 @@ class ContactData extends Component {
           type: 'text',
           placeholder: 'Your name',
         },
-        value: ''
+        value: null
       },
       street:{
         elementType: 'input',
@@ -25,7 +25,7 @@ class ContactData extends Component {
           type: 'text',
           placeholder: 'Your stree name',
         },
-        value: ''
+        value: null
       },
       zipCode:{
         elementType: 'input',
@@ -33,23 +33,23 @@ class ContactData extends Component {
           type: 'text',
           placeholder: 'Your zipcode',
         },
-        value: ''
+        value: null
       },
       country:{
         elementType: 'input',
         elementConfig: {
           type: 'text',
-          placeholder: 'Country',
+          placeholder: "Country",
         },
-        value: ''
+        value: null
       },
       email:{
         elementType: 'input',
         elementConfig: {
           type: 'email',
-          placeholder: 'Your email',
+          placeholder: "Your email",
         },
-        value: ''
+        value: null
       },
       deliveryMethod:{
         elementType: 'select',
@@ -65,7 +65,6 @@ class ContactData extends Component {
             }
         ]
         },
-        value: ''
       },
     },
     loading: false
@@ -99,6 +98,20 @@ class ContactData extends Component {
     });
   }
 
+  inputChangedHandler = (event, inputIdentifier) => {
+    const updatedOrderForm = {
+      ...this.state.orderform
+    }
+    const updatedFormElement = {
+      ...updatedOrderForm[inputIdentifier]
+    }
+
+    updatedFormElement.value = event.target.value;
+    updatedFormElement[inputIdentifier] = updatedFormElement;
+    this.setState({orderform: updatedOrderForm});
+
+  }
+
   render() {
 
     const formElementsArray = [];
@@ -109,7 +122,6 @@ class ContactData extends Component {
       })
     }
 
-    console.log(formElementsArray)
 
     let form = (
       <form>
@@ -118,7 +130,8 @@ class ContactData extends Component {
           key={formElement.key}
           elementType={formElement.config.elementType} 
           elementConfig={formElement.config.elementConfig}
-          value={formElement.config.value}/>
+          value={formElement.config.value}
+          changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
         ))}
         <Button clicked={this.orderHandler} btnType="Success">ORDER HERE</Button>
       </form>
