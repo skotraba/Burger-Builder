@@ -24,7 +24,7 @@ class BugerBuilder extends Component {
  state = {
   //  ingredients: [],
   //  totalPrice: 4,
-   purchasable: false,
+  //  purchasable: false,
    purchasing: false,
    loading: false,
    error: false
@@ -40,14 +40,14 @@ class BugerBuilder extends Component {
  }
 
  updatePurchaseState (ingredients) {
-  const sum = Object.keys(ingredients)
+  const sum = Object.keys( ingredients )
   .map(igKey => {
       return ingredients[igKey];
   } )
   .reduce((sum, el) => {
       return sum + el;
   }, 0);
-  this.setState({ purchasable: sum > 0 } );
+   return sum > 0
 
  }
 
@@ -61,16 +61,13 @@ class BugerBuilder extends Component {
 
  purchaseContinueHandler = () => {
   // this.props.history.push('./checkout');
-  const query = [];
-  for (let i in this.state.ingredients) {
-    query.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
-  }
-  query.push('price=' + this.state.totalPrice);
-  const queryString = query.join('&');
-  this.props.history.push({
-    pathname: '/checkout',
-    search: '?' + queryString,
-  })
+  // const query = [];
+  // for (let i in this.state.ingredients) {
+  //   query.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
+  // }
+  // query.push('price=' + this.state.totalPrice);
+  // const queryString = query.join('&');
+  this.props.history.push('/checkout')
   
  }
   
@@ -95,7 +92,7 @@ class BugerBuilder extends Component {
                     ingredientAdded={this.props.onIngredientAdded}
                     ingredientRemoved={this.props.onRemoveIngredient}
                     disabled={disabledInfo}
-                    purchasable={this.state.purchasable}
+                    purchasable={this.updatePurchaseState(this.props.ings)}
                     ordered={this.purchaseHandler}
                     price={this.props.price} />
             </Auxx>
@@ -112,7 +109,6 @@ class BugerBuilder extends Component {
         orderSummary = <Spinner />;
 
     }
-    // {salad: true, meat: false, ...}
     return (
         <Auxx>
             <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
