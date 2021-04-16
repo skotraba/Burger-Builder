@@ -27,3 +27,8 @@
   outline: none;
   background-color: rgb(185, 185, 185);
 }
+
+.Invalid {
+  border: 1px solid rgb(240, 53, 53);
+  background-color: salmon;
+}
